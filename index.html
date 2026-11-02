@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savivet - Clínica Veterinaria en Escairón</title>
+
+    <!-- ========================================== -->
+    <!-- FAVICON (Icono de la pestaña del navegador) -->
+    <!-- ========================================== -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+
+    <!-- ========================================== -->
+    <!-- SEO Y METADATOS (Información para Google)  -->
+    <!-- ========================================== -->
+    <meta name="description"
+        content="Savivet - Clínica Veterinaria y tienda especializada en Escairón (O Saviñao). Consultas, cirugía, nutrición y accesorios para tu mascota.">
+    <link rel="canonical" href="https://savivet.com">
+
+    <!-- ========================================== -->
+    <!-- LIBRERÍAS Y FUENTES (Tailwind, FontAwesome) -->
+    <!-- ========================================== -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuente de Google: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- ========================================== -->
+    <!-- CONFIGURACIÓN DE TAILWIND (Colores / Fuentes) -->
+    <!-- ========================================== -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#F4A91B', /* Ámbar primario de Savivet */
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        dark: {
+                            800: '#26221f',
+                            900: '#1c1917',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- ========================================== -->
+    <!-- CABECERA Y BARRA DE NAVEGACIÓN (HEADER/NAV) -->
+    <!-- ========================================== -->
+    <header
+        class="fixed top-0 left-0 right-0 z-40 bg-brand-100/90 backdrop-blur-md border-b border-brand-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Logo e identificación de la clínica -->
+                <a href="#inicio" class="flex items-center gap-4 group">
+                    <div class="h-20 flex items-center justify-center flex-shrink-0">
+                        <img src="img/logo.png" alt="Logo Savivet"
+                            class="h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    </div>
+                    <div>
+                        <span
+                            class="text-2xl font-black tracking-tight text-dark-900 group-hover:text-brand-700 transition-colors uppercase">Savivet</span>
+                        <span class="block text-xs font-extrabold text-brand-800 -mt-1 tracking-wider uppercase">Clínica
+                            Veterinaria</span>
+                    </div>
+                </a>
+
+                <!-- Menú de navegación para ordenadores (Desktop) -->
+                <nav class="hidden md:flex items-center gap-7 font-bold text-slate-800 text-sm">
+                    <a href="#inicio" class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-dog text-base"></i> Inicio
+                    </a>
+                    <a href="#servicios" class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-stethoscope text-base"></i> Servicios
+                    </a>
+                    <a href="#equipo" class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-doctor text-base"></i> Nuestro Equipo
+                    </a>
+                    <a href="#contacto" class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-map-location-dot text-base"></i> Ubicación
+                    </a>
+                    <a href="#resenas" class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen-to-square text-base"></i> Reseñas
+                    </a>
+                    <a href="https://instagram.com/savivet.veterinarios" target="_blank" rel="noopener noreferrer"
+                        class="hover:text-brand-700 transition-colors flex items-center gap-1.5">
+                        <i class="fa-brands fa-instagram text-base"></i> Redes
+                    </a>
+                </nav>
+
+                <!-- Botón de llamada rápida (Desktop) -->
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="openPhoneModal()"
+                        class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-dark-900 font-black px-5 py-2.5 rounded-xl shadow-md shadow-brand-500/30 hover:shadow-lg transition-all active:scale-95">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Contacto Directo</span>
+                    </button>
+                </div>
+
+                <!-- Botones para móvil (Teléfono y Menú hamburguesa) -->
+                <div class="flex md:hidden items-center gap-2">
+                    <button onclick="openPhoneModal()"
+                        class="bg-brand-200 text-brand-900 p-2.5 rounded-xl text-sm font-bold">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación"
+                        class="text-slate-800 hover:text-slate-900 p-2 rounded-lg">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú desplegable para móviles -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-100 border-b border-brand-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-800 font-bold hover:text-brand-700">Inicio</a>
+            <a href="#servicios" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-800 font-bold hover:text-brand-700">Servicios</a>
+            <a href="#equipo" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-800 font-bold hover:text-brand-700">Nuestro Equipo</a>
+            <a href="#contacto" onclick="toggleMobileMenu()"
+                class="block py-2 text-slate-800 font-bold hover:text-brand-700">Ubicación</a>
+            <button onclick="toggleMobileMenu(); openPhoneModal();"
+                class="w-full text-center bg-brand-500 text-dark-900 py-3 rounded-xl font-extrabold mt-2 shadow-md">
+                <i class="fa-solid fa-phone mr-2"></i> Llama al 982 45 27 54
+            </button>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE INICIO (HERO SECTION)          -->
+    <!-- ========================================== -->
+    <section id="inicio"
+        class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-brand-100/60 via-brand-50/20 to-slate-50 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Texto principal y llamadas a la acción -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-200/80 text-brand-900 text-xs font-bold tracking-wide uppercase border border-brand-300">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>O Saviñao (C.P. 27540)</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-dark-900 tracking-tight leading-tight">
+                        Cuidado veterinario integral y cercano en <span class="text-brand-600">Savivet</span>
+                    </h1>
+
+                    <p class="text-lg text-slate-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+                        Atención médica especializada para animales de compañía y productos de primera calidad.<br> Tu
+                        centro de confianza en la Ribeira Sacra.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="openPhoneModal()"
+                            class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-dark-900 font-bold px-8 py-4 rounded-xl shadow-lg shadow-brand-500/30 hover:shadow-xl transition-all flex items-center justify-center gap-3 text-base">
+                            <i class="fa-solid fa-phone-volume text-lg"></i>
+                            <span>Llamar a la Clínica</span>
+                        </button>
+                        <a href="#servicios"
+                            class="w-full sm:w-auto bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-bold px-8 py-4 rounded-xl transition-colors text-center text-base shadow-sm">
+                            Ver Servicios
+                        </a>
+                    </div>
+
+                    <!-- Datos rápidos de la clínica -->
+                    <div class="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 text-left border-t border-slate-200/80 mt-8">
+                        <div>
+                            <span class="block text-xl font-black text-dark-900">Atención</span>
+                            <span class="text-sm font-medium text-slate-600">Clínica y Tienda</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-black text-dark-900">Ubicación</span>
+                            <span class="text-sm font-medium text-slate-600">Rosalía de Castro 94</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="block text-xl font-black text-dark-900">Teléfono</span>
+                            <span class="text-sm font-medium text-slate-600">982 45 27 54</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Imagen principal de la clínica -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div
+                            class="absolute -top-4 -left-4 w-72 h-72 bg-brand-300/50 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse">
+                        </div>
+                        <div
+                            class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200 aspect-[4/3] sm:aspect-[1/1]">
+                            <img src="img/local.jpg" alt="Atención veterinaria Savivet"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent">
+                            </div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <p class="text-sm font-medium opacity-90 text-brand-200">Compromiso con el bienestar
+                                    animal</p>
+                                <p class="text-xl font-black">Salud, Alimentación y Cuidado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE SERVICIOS                      -->
+    <!-- ========================================== -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-brand-600 uppercase mb-2">Especialidades</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-dark-900 tracking-tight">Nuestros Servicios
+                    Veterinarios</p>
+                <p class="mt-4 text-slate-600 text-lg">Ofrecemos medicina preventiva, tienda especializada de
+                    alimentación y complementos en Escairón.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Servicio 1: Consultas -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-brand-300">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-900 mb-3">Consultas y Prevención</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Vacunaciones, desparasitación interna y externa, revisiones periódicas, microchips y
+                        certificados oficiales.
+                    </p>
+                </div>
+
+                <!-- Servicio 2: Cirugía -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-brand-300">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-900 mb-3">Cirugía y Diagnóstico</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Intervenciones quirúrgicas generales, esterilización, análisis clínicos y diagnóstico por
+                        imagen.
+                    </p>
+                </div>
+
+                <!-- Servicio 3: Tienda -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-brand-300">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-900 mb-3">Tienda Especializada</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Venta de comida de alta gama, piensos recomendados, arneses, correas, juguetes y accesorios para
+                        tu mascota.
+                    </p>
+                </div>
+
+                <!-- Servicio 4: Higiene -->
+                <div
+                    class="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-brand-300">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-900 mb-3">Higiene y Cuidado</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Champús dermatológicos, productos para la higiene dental, oídos, antiparasitarios y suplementos
+                        nutricionales.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DEL EQUIPO VETERINARIO            -->
+    <!-- ========================================== -->
+    <section id="equipo" class="py-20 bg-slate-50 border-y border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-brand-600 uppercase mb-2">Profesionales</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-dark-900 tracking-tight">Nuestro Equipo Humano</p>
+                <p class="mt-4 text-slate-600 text-lg">En Savivet contamos con un equipo altamente cualificado y
+                    comprometido con la salud animal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Miembro 1: Iria -->
+                <div
+                    class="relative bg-dark-900 rounded-2xl overflow-hidden shadow-md border-2 border-brand-400 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 min-h-[380px] flex flex-col justify-end text-center group">
+                    <img src="img/iria.jpeg" alt="Iria Rodríguez Domínguez" loading="lazy"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x800/1C1917/F4A91B?text=Iria';">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"></div>
+
+                    <div class="relative z-10 p-6 text-white">
+                        <h3 class="text-2xl font-black text-white tracking-tight">Iria </h3>
+                        <span
+                            class="inline-block px-2.5 py-0.5 rounded-full bg-brand-500 text-dark-900 text-[10px] font-black uppercase tracking-wider mb-2 shadow-sm">
+                            Veterinaria
+                        </span>
+                        <p class="mt-2 text-slate-200 text-sm leading-relaxed font-medium">
+                            Especializada en cirugía general y nutrición.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Miembro 2: Cris -->
+                <div
+                    class="relative bg-dark-900 rounded-2xl overflow-hidden shadow-md border-2 border-brand-400 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 min-h-[380px] flex flex-col justify-end text-center group">
+                    <img src="img/cris.jpeg" alt="Cristina Sánchez Daviña" loading="lazy"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x800/1C1917/F4A91B?text=Cris';">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"></div>
+
+                    <div class="relative z-10 p-6 text-white">
+                        <h3 class="text-2xl font-black text-white tracking-tight">Cris </h3>
+                        <span
+                            class="inline-block px-2.5 py-0.5 rounded-full bg-brand-500 text-dark-900 text-[10px] font-black uppercase tracking-wider mb-2 shadow-sm">
+                            Veterinaria
+                        </span>
+                        <p class="mt-2 text-slate-200 text-sm leading-relaxed font-medium">
+                            Especialista en medicina interna y ecografía.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Miembro 3: Sabela -->
+                <div
+                    class="relative bg-dark-900 rounded-2xl overflow-hidden shadow-md border-2 border-brand-400 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 min-h-[380px] flex flex-col justify-end text-center group">
+                    <img src="img/sabela.jpeg" alt="Sabela Jorge Vidal" loading="lazy"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x800/1C1917/F4A91B?text=Sabela';">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"></div>
+
+                    <div class="relative z-10 p-6 text-white">
+                        <h3 class="text-2xl font-black text-white tracking-tight">Sabela </h3>
+                        <span
+                            class="inline-block px-2.5 py-0.5 rounded-full bg-brand-500 text-dark-900 text-[10px] font-black uppercase tracking-wider mb-2 shadow-sm">
+                            Veterinaria
+                        </span>
+                        <p class="mt-2 text-slate-200 text-sm leading-relaxed font-medium">
+                            Especialista en medicina interna y felina.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE CONTACTO, MAPA Y FORMULARIO     -->
+    <!-- ========================================== -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                <!-- Columna Izquierda: Información de contacto y Mapa -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <h2 class="text-xs font-black tracking-widest text-brand-600 uppercase mb-2">¿Dónde estamos?
+                        </h2>
+                        <h3 class="text-3xl font-extrabold text-dark-900">Contacto y Ubicación</h3>
+                        <p class="text-slate-600 mt-2">Visítanos en nuestra clínica en Escairón o ponte en contacto por
+                            teléfono.</p>
+                    </div>
+
+                    <!-- Mapa embebido de Google Maps -->
+                    <div class="mt-6 rounded-2xl overflow-hidden shadow-md border border-slate-200/80 relative group">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2936.523412345678!2d-7.718000!3d42.585000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e132000000000%3A0x0!2zQ2FsbGUgUm9zYWzDrWEgZGUgQ2FzdHJvLCA5NCwgMjc1NDAgRXNjYWlyw7NuLCBMdWdv!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses"
+                            width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="w-full grayscale focus:grayscale-0 hover:grayscale-0 transition-all duration-300">
+                        </iframe>
+
+                        <a href="https://maps.google.com/?q=Calle+Rosalía+de+Castro+94+Escairón+Lugo" target="_blank"
+                            rel="noopener noreferrer"
+                            class="absolute bottom-3 right-3 bg-white hover:bg-slate-100 text-dark-900 font-extrabold text-xs px-3.5 py-2 rounded-xl shadow-lg border border-slate-200 flex items-center gap-2 transition-all group-hover:scale-105">
+                            <i class="fa-solid fa-location-arrow text-brand-600"></i>
+                            <span>Cómo llegar en GPS</span>
+                        </a>
+                    </div>
+
+                    <!-- Bloques de Dirección, Teléfono y Horario -->
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center flex-shrink-0 text-lg font-bold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dark-900">Dirección</h4>
+                                <p class="text-slate-600 text-sm mt-0.5">Calle Rosalía de Castro, 94</p>
+                                <p class="text-slate-600 text-sm">27540 Escairón, Lugo</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center flex-shrink-0 text-lg font-bold">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dark-900">Teléfono Directo</h4>
+                                <p class="text-slate-600 text-sm mt-0.5">Llámanos para citas o consultas:</p>
+                                <button onclick="openPhoneModal()"
+                                    class="text-brand-600 hover:text-brand-700 font-extrabold text-xl mt-1 block">
+                                    982 45 27 54
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center flex-shrink-0 text-lg font-bold">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dark-900">Horario habitual</h4>
+                                <p class="text-slate-600 text-sm mt-0.5">Lunes a Jueves: 9:30 - 13:30 | 17:00 - 20:00
+                                </p>
+                                <p class="text-slate-600 text-sm mt-0.5">Viernes: 9:30 - 18:00</p>
+                                <p class="text-slate-600 text-sm">Sábados: 10:30 - 13:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Formulario de contacto con Web3Forms -->
+                <div class="lg:col-span-7 bg-slate-50 p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+                    <h4 class="text-xl font-bold text-dark-900 mb-2">Envíanos una consulta</h4>
+                    <p class="text-slate-600 text-sm mb-6">Escríbenos y te responderemos lo antes posible.</p>
+
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="space-y-4">
+                        <input type="hidden" name="access_key" value="TU_ACCESS_KEY_AQUÍ">
+                        <input type="hidden" name="subject" value="Nueva consulta desde la web Savivet">
+                        <input type="hidden" name="from_name" value="Web Savivet">
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre</label>
+                            <input type="text" name="nombre" required placeholder="Tu nombre"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Teléfono</label>
+                            <input type="tel" name="telefono" required placeholder="Tu número de teléfono"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Tipo de
+                                Consulta</label>
+                            <select name="tipo_consulta"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white text-sm text-slate-700">
+                                <option>Consulta médica / Cita</option>
+                                <option>Alimentación y piensos</option>
+                                <option>Accesorios (Arneses, juguetes...)</option>
+                                <option>Otros / Consulta general</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mensaje</label>
+                            <textarea name="mensaje" rows="4" required placeholder="¿En qué podemos ayudarte?"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white text-sm"></textarea>
+                        </div>
+
+                        <!-- Casilla de Privacidad Obligatoria con name para que se registre el consentimiento -->
+                        <div class="flex items-start gap-2 pt-1">
+                            <input type="checkbox" id="privacy-check" name="aceptar_privacidad" value="Aceptada"
+                                required class="mt-1 rounded border-slate-300 text-brand-500 focus:ring-brand-500">
+                            <label for="privacy-check" class="text-xs text-slate-600">
+                                He leído y acepto la <a href="privacidad.html" target="_blank"
+                                    class="text-brand-700 underline font-semibold">Política de Privacidad</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-brand-500 hover:bg-brand-600 text-dark-900 font-bold py-3.5 rounded-xl transition-colors shadow-md shadow-brand-500/20">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+
+                    <div id="form-success"
+                        class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+                        <i class="fa-solid fa-circle-check mr-2"></i> ¡Mensaje enviado con éxito! Nos pondremos en
+                        contacto contigo pronto.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE RESEÑAS DE GOOGLE (WIDGET)     -->
+    <!-- ========================================== -->
+    <section id="resenas" class="py-20 bg-slate-50 border-t border-slate-200/80">
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-086e5eb0-9520-42a0-bd65-8328e94c44d4" data-elfsight-app-lazy></div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PIE DE PÁGINA (FOOTER)                     -->
+    <!-- ========================================== -->
+    <footer class="bg-dark-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div class="flex items-center gap-3">
+                    <!-- Logo e identificación de la clínica -->
+                    <a href="#inicio" class="flex items-center gap-4 group">
+                        <div class="h-20 flex items-center justify-center flex-shrink-0">
+                            <img src="img/logo.png" alt="Logo Savivet"
+                                class="h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                        </div>
+                        <div>
+                            <span
+                                class="text-2xl font-black tracking-tight text-white group-hover:text-brand-700 transition-colors uppercase">Savivet</span>
+                            <span
+                                class="block text-xs font-extrabold text-brand-800 -mt-1 tracking-wider uppercase">Clínica
+                                Veterinaria</span>
+                        </div>
+                </div>
+                <p class="text-sm">
+                    Calle Rosalía de Castro 94, Escairón (C.P. 27540) &bull; Tel: <a href="tel:982452754"
+                        class="text-brand-400 hover:underline font-bold">982 45 27 54</a>
+                </p>
+                <a href="https://instagram.com/savivet.veterinarios" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-slate-400 hover:text-brand-400 text-sm font-semibold transition-colors">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                    <span>@savivet.veterinarios</span>
+                </a>
+                <p class="text-xs text-slate-500">
+                    &copy; <span id="year"></span> Savivet. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+
+        <!-- Enlaces a Avisos Legales -->
+        <div class="mt-6 pt-6 border-t border-slate-800 flex flex-wrap justify-center gap-6 text-xs text-slate-400">
+            <a href="aviso-legal.html" class="hover:text-brand-400 transition-colors">Aviso Legal</a>
+            <a href="privacidad.html" class="hover:text-brand-400 transition-colors">Política de Privacidad</a>
+            <a href="cookies.html" class="hover:text-brand-400 transition-colors">Política de Cookies</a>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- VENTANA EMERGENTE DE TELÉFONO (MODAL)      -->
+    <!-- ========================================== -->
+    <div id="phoneModal"
+        class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-dark-900/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closePhoneModal()" aria-label="Cerrar ventana emergente"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-800 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                    <i class="fa-solid fa-phone-volume"></i>
+                </div>
+
+                <h3 class="text-2xl font-black text-dark-900">Contacto Savivet</h3>
+                <p class="text-slate-500 text-sm mt-1">Atención telefónica en Escairón</p>
+
+                <div class="my-6 p-4 rounded-2xl bg-brand-50 border border-brand-200">
+                    <span class="block text-xs font-bold text-brand-900 uppercase tracking-wider mb-1">Teléfono
+                        Directo</span>
+                    <a href="tel:982452754"
+                        class="text-3xl font-black text-brand-700 hover:text-brand-800 tracking-tight">
+                        982 45 27 54
+                    </a>
+                </div>
+
+                <div class="space-y-3">
+                    <a href="tel:982452754"
+                        class="w-full bg-brand-500 hover:bg-brand-600 text-dark-900 font-bold py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Llamar ahora</span>
+                    </a>
+                    <button onclick="copyPhoneNumber()"
+                        class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-colors text-sm flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copyText">Copiar número</span>
+                    </button>
+                </div>
+
+                <p class="text-xs text-slate-400 mt-6">Calle Rosalía de Castro 94, Escairón</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT DE JAVASCRIPT EXTERNO               -->
+    <!-- ========================================== -->
+    <script src="js/main.js"></script>
+
+    <!-- ========================================== -->
+    <!-- BANNER DE AVISO DE COOKIES                 -->
+    <!-- ========================================== -->
+    <div id="cookie-banner"
+        class="fixed bottom-0 left-0 right-0 z-50 bg-dark-900/95 text-slate-200 p-4 border-t border-slate-800 backdrop-blur-md hidden">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <p class="text-slate-300 text-center md:text-left">
+                Utilizamos cookies propias y de terceros para analizar el uso del sitio web y mejorar nuestros
+                servicios.
+                Puedes aceptar todas las cookies, rechazarlas o configurar tus preferencias. Más información en nuestra
+                <a href="cookies.html" class="text-brand-400 underline hover:text-brand-300">Política de Cookies</a>.
+            </p>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <button onclick="rejectCookies()"
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-medium transition-colors">
+                    Rechazar
+                </button>
+                <button onclick="acceptCookies()"
+                    class="px-5 py-2 bg-brand-500 hover:bg-brand-600 text-dark-900 font-bold rounded-xl shadow-md transition-colors">
+                    Aceptar todas
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
